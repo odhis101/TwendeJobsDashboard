@@ -27,11 +27,10 @@ const ThemeRoutes = [
     children: [
       { path: "/", element: <Navigate to="/starter" /> },
       { path: "/starter", exact: true, element: <Starter /> },
- 
+      { path: "/alerts", exact: true, element: <Alerts /> },
       { path: "/table", exact: true, element: <Tables /> },
       { path: "/jobs", exact: true, element: <Jobs /> },
-      { path: "/forms", exact: true, element: <Forms /> },
-      { path: "/breadcrumbs", exact: true, element: <Breadcrumbs /> },
+    
     ],
   },
 ];
