@@ -4,7 +4,11 @@ import user2 from "../../assets/images/users/user2.jpg";
 import user3 from "../../assets/images/users/user3.jpg";
 import user4 from "../../assets/images/users/user4.jpg";
 import user5 from "../../assets/images/users/user5.jpg";
+import { useSelector, useDispatch  } from 'react-redux';
+import { getUsers} from '../../features/auth/authSlice'
 
+import { useEffect,useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 const tableData = [
   {
     avatar: user1,
@@ -52,7 +56,31 @@ const tableData = [
   },
 ];
 
+
 const ProjectTables = () => {
+   const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { user } = useSelector((state) => state.auth)
+
+    const { goals, isLoading, isError, message } = useSelector(
+      (state) => state.auth
+    )
+    useEffect(() => {
+
+      if (isError) {
+        console.log('there was an error while loading', message)
+      }
+  
+  
+      dispatch(getUsers())
+  
+     
+    }, [])
+
+console.log('goals', goals)
+console.log('user', )
+
+
   return (
     <div>
       <Card>
@@ -65,7 +93,7 @@ const ProjectTables = () => {
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
               <tr>
-                <th>Users</th>
+                
                 <th>Phone number </th>
 
                 <th>Subscription status </th>
@@ -75,24 +103,12 @@ const ProjectTables = () => {
               </tr>
             </thead>
             <tbody>
-              {tableData.map((tdata, index) => (
-                <tr key={index} className="border-top">
-                  <td>
-                    <div className="d-flex align-items-center p-2">
-                      <img
-                        src={tdata.avatar}
-                        className="rounded-circle"
-                        alt="avatar"
-                        width="45"
-                        height="45"
-                      />
-                      <div className="ms-3">
-                        <h6 className="mb-0">{tdata.name}</h6>
-                        <span className="text-muted">{tdata.email}</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{tdata.number}</td>
+              {goals === undefined ? <p>loading</p> : 
+goals.length > 0 ? (
+              goals.map((tdata, goal) => (
+                <tr key={goal._id} className="border-top">
+                  
+                  <td>12</td>
                   <td>
                     {tdata.status === "pending" ? (
                       <span className="p-2 bg-danger rounded-circle d-inline-block ms-3"></span>
@@ -102,9 +118,12 @@ const ProjectTables = () => {
                   </td>
                   <td>UPDATE</td>
                   <td>DELETE</td>
-                  <td>{tdata.mpesa}</td>
+                  <td>12</td>
                 </tr>
-              ))}
+              ))) : (
+                <h3>You have not set any goals</h3>
+        )
+              }
             </tbody>
           </Table>
         </CardBody>

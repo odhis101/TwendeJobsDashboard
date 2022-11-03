@@ -1,5 +1,13 @@
 import ProjectTables from "../../components/dashboard/ProjectTable";
 import { Row, Col, Table, Card, CardTitle, CardBody } from "reactstrap";
+
+import { useSelector, useDispatch  } from 'react-redux';
+import { getUsers} from '../../features/auth/authSlice'
+
+import { useEffect,useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { getGoals, reset } from '../../features/jobs/jobSclice'
+
 const tableData = [
   {
 
@@ -45,7 +53,26 @@ const tableData = [
   },
 ];
 const Jobs = () => {
-  return (
+  const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { user } = useSelector((state) => state.auth)
+    const { goals, isLoading, isError, message } = useSelector(
+      (state) => state.jobs
+    )
+    useEffect(() => {
+
+      if (isError) {
+        console.log('there was an error while loading', message)
+      }
+  
+  
+      dispatch(getGoals())
+  
+     
+    }, [user, navigate, isError, message, dispatch])
+  
+    console.log(goals)
+    return (
     <Row>
         <Col lg="12">
         <Card>
@@ -61,7 +88,7 @@ const Jobs = () => {
                   <th>Category </th>
                   <th>Description</th>
                   <th>Posted By</th>
-                  <th>Phone number</th>
+                  <th>Employer Contact</th>
                   <th>Update</th>
                   <th>Remove</th>
                 
@@ -69,13 +96,15 @@ const Jobs = () => {
               </thead>
               <tbody>
               
-              {tableData.map((tdata, index) => (
+              {
+              goals === undefined ? <p>loading</p> :      
+              goals.map((goal, index) => (
                 <tr key={index} className="border-top">
                   <th scope="row">{index + 1}</th>
-                  <td>{tdata.Category}</td>
-                  <td>{tdata.Description}</td>
-                  <td>{tdata.user}</td>
-                  <td>{tdata.Posted_By}</td>
+                  <td>{goal.Category}</td>
+                  <td>{goal.jobDescription}</td>
+                  <td>{goal.user}</td>
+                  <td>{goal.Employers_contact}</td>
                  
                   <td>UPDATE</td>
                   <td>Remove</td>
