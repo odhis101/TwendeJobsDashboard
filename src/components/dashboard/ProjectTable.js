@@ -9,53 +9,6 @@ import { getUsers} from '../../features/auth/authSlice'
 
 import { useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-const tableData = [
-  {
-    avatar: user1,
-    name: "Hanna Gover",
-    email: "hgover@gmail.com",
-    number: "0703765432",
-    status: "done",
-    mpesa: "XXXYYYZZZ5 Confirmed. ",
-  
-  },
-  {
-    avatar: user2,
-    name: "Hanna Gover",
-    email: "hgover@gmail.com",
-    number: "0703765432",
-    status: "done",
-    mpesa: "XXXYYYZZZ5 Confirmed .",
- 
-  },
-  {
-    avatar: user3,
-    name: "Hanna Gover",
-    email: "hgover@gmail.com",
-    number: "0703765432",
-    status: "holt",
-    mpesa: "XXXYYYZZZ5 Confirmed ",
-    
-  },
-  {
-    avatar: user4,
-    name: "Hanna Gover",
-    email: "hgover@gmail.com",
-    number: "0703765432",
-    status: "pending",
-    mpesa: "XXXYYYZZZ5 Confirmed. ",
-  },
-  {
-    avatar: user5,
-    name: "Hanna Gover",
-    email: "hgover@gmail.com",
-    number: "0703765432",
-    status: "done",
-    mpesa: "XXXYYYZZZ5 Confirmed.",
-    
-  },
-];
-
 
 const ProjectTables = () => {
    const dispatch = useDispatch()
@@ -76,7 +29,6 @@ const ProjectTables = () => {
   
      
     }, [])
-
 console.log('goals', goals)
 console.log('user', )
 
@@ -108,7 +60,7 @@ goals.length > 0 ? (
               goals.map((tdata, goal) => (
                 <tr key={goal._id} className="border-top">
                   
-                  <td>12</td>
+                  <td>{goal.phoneNumber}</td>
                   <td>
                     {tdata.status === "pending" ? (
                       <span className="p-2 bg-danger rounded-circle d-inline-block ms-3"></span>

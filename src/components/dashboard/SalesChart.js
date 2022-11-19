@@ -74,15 +74,15 @@ const SalesChart = () => {
           <Row>
             <Col md="4">
               <h6>Total Sales</h6>
-              <h4 className="mb-0 fw-bold">$10,345</h4>
+              <h4 className="mb-0 fw-bold">KSH 10,345</h4>
             </Col>
             <Col md="4">
               <h6>This Month</h6>
-              <h4 className="mb-0 fw-bold">$7,545</h4>
+              <h4 className="mb-0 fw-bold">KSH 7,545</h4>
             </Col>
             <Col md="4">
               <h6>This Week</h6>
-              <h4 className="mb-0 fw-bold">$1,345</h4>
+              <h4 className="mb-0 fw-bold">KSH 1,345</h4>
             </Col>
           </Row>
         </div>

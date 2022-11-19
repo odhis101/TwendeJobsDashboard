@@ -138,9 +138,7 @@ const Tables = () => {
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                 
                   <th>Phone number</th>
                   <th>Subscription status</th>
                   <th>Update</th>
@@ -153,9 +151,7 @@ const Tables = () => {
               {tableData.map((tdata, index) => (
                 <tr key={index} className="border-top">
                   <th scope="row">{index + 1}</th>
-                  <td>{tdata.name}</td>
-                  <td>{tdata.name}</td>
-                  <td>{tdata.name}</td>
+               
                   <td>{tdata.number}</td>
                   <td>
                     {tdata.status === "pending" ? (
