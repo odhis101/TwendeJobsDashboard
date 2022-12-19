@@ -12,13 +12,6 @@ const register = async (userData) => {
 
   return response.data
 }
-const getUsers = async () => {
-  
-  
-  const response = await axios.get("http://localhost:5000/users/getUsers")
-
-  return response.data
-}
 
 // Login user
 const login = async (userData) => {
@@ -33,7 +26,20 @@ const login = async (userData) => {
 
   return response.data
 }
+const updateUser = async (userData) => {
+  
+  
+  const response = await axios.get("http://localhost:5000/users/updateUser",userData)
 
+  return response.data
+}
+const getUsers = async () => {
+  
+  
+  const response = await axios.get("http://localhost:5000/users/getUsers")
+
+  return response.data
+}
 // Logout user
 const logout = () => {
   localStorage.removeItem('user')
@@ -41,9 +47,10 @@ const logout = () => {
 
 const authService = {
   register,
+  updateUser,
   logout,
+  login,
   getUsers,
-  login
 }
 
 export default authService

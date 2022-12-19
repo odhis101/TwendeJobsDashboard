@@ -1,17 +1,18 @@
 import { Card, CardBody, CardTitle, CardSubtitle, Table } from "reactstrap";
-import user1 from "../../assets/images/users/user1.jpg";
-import user2 from "../../assets/images/users/user2.jpg";
-import user3 from "../../assets/images/users/user3.jpg";
-import user4 from "../../assets/images/users/user4.jpg";
-import user5 from "../../assets/images/users/user5.jpg";
+
 import { useSelector, useDispatch  } from 'react-redux';
 import { getUsers} from '../../features/auth/authSlice'
-
-import { useEffect,useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { useEffect,useState,Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const ProjectTables = () => {
+  const [showModal, setShowModal] = useState(false);
    const dispatch = useDispatch()
+   let [isOpen, setIsOpen] = useState(true)
+
+ 
     const navigate = useNavigate()
     const { user } = useSelector((state) => state.auth)
 
@@ -35,6 +36,7 @@ console.log('user', )
 
   return (
     <div>
+
       <Card>
         <CardBody>
           <CardTitle tag="h5">Latest Subscribers </CardTitle>
@@ -47,7 +49,6 @@ console.log('user', )
               <tr>
                 
                 <th>Phone number </th>
-
                 <th>Subscription status </th>
                 <th>Update</th>
                 <th>Remove</th>
@@ -60,7 +61,7 @@ goals.length > 0 ? (
               goals.map((tdata, goal) => (
                 <tr key={goal._id} className="border-top">
                   
-                  <td>{goal.phoneNumber}</td>
+                  <td>{tdata.phoneNumber}</td>
                   <td>
                     {tdata.status === "pending" ? (
                       <span className="p-2 bg-danger rounded-circle d-inline-block ms-3"></span>
@@ -68,8 +69,18 @@ goals.length > 0 ? (
                       <span className="p-2 bg-success rounded-circle d-inline-block ms-3"></span>
                     )}
                   </td>
-                  <td>UPDATE</td>
-                  <td>DELETE</td>
+                  <td >  
+                  <button type="button" class="btn btn-success disabled">update</button>
+      
+      
+      </td>
+                  <td>   <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
+Delete
+</button>
+
+
+
+ </td>
                   <td>12</td>
                 </tr>
               ))) : (
@@ -79,8 +90,13 @@ goals.length > 0 ? (
             </tbody>
           </Table>
         </CardBody>
+ 
       </Card>
+             
+
     </div>
+
+
   );
 };
 
