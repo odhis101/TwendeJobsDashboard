@@ -67,8 +67,10 @@ const Tables = () => {
                       <span className="p-2 bg-success rounded-circle d-inline-block ms-3"></span>
                     )}
                   </td>
-                  <td>UPDATE</td>
-                  <td>Remove</td>
+                  <td> <button type="button" class="btn btn-success disabled">update</button></td>
+                  <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
+Delete
+</button></td>
                   <td>XXXYYYZZZ5 Confirmed.</td>
                 </tr>
               ))}
@@ -118,8 +120,10 @@ const Tables = () => {
                       <span className="p-2 bg-success rounded-circle d-inline-block ms-3"></span>
                     )}
                   </td>
-                  <td>UPDATE</td>
-                  <td>Remove</td>
+                  <td> <button type="button" class="btn btn-success disabled">update</button></td>
+                  <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
+Delete
+</button></td>
                   <td>XXXYYYZZZ5 Confirmed.</td>
                 </tr>
               ))}

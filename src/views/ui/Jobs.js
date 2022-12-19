@@ -106,8 +106,10 @@ const Jobs = () => {
                   <td>{goal.user}</td>
                   <td>{goal.Employers_contact}</td>
                  
-                  <td>UPDATE</td>
-                  <td>Remove</td>
+                  <td> <button type="button" class="btn btn-success disabled">update</button></td>
+                  <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
+Delete
+</button></td>
                
                 </tr>
               ))}
