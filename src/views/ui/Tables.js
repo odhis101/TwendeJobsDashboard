@@ -41,6 +41,7 @@ const Tables = () => {
                  
                   <th>Phone number</th>
                   <th>Subscription status</th>
+                  <th>Amount</th>
                   <th>Update</th>
                   <th>Remove</th>
                   <th>Mpesa Confirmation</th>
@@ -67,6 +68,7 @@ const Tables = () => {
                       <span className="p-2 bg-success rounded-circle d-inline-block ms-3"></span>
                     )}
                   </td>
+                  <td>{goal.amount}</td>
                   <td> <button type="button" class="btn btn-success disabled">update</button></td>
                   <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
 Delete
