@@ -1,5 +1,6 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
 const navigation = [
   {
@@ -30,6 +31,14 @@ const navigation = [
 ];
 
 const Sidebar = () => {
+  const { user} = useSelector((state) => state.auth);
+  console.log(user)
+  if(user=== null){
+    alert('Please login to continue')
+    window.location.href = '/login'
+}
+
+
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };

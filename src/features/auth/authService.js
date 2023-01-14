@@ -26,6 +26,20 @@ const login = async (userData) => {
 
   return response.data
 }
+
+const loginAdmin = async (userData) => {
+  const response = await axios.post("http://localhost:5000/users/loginAdmin", userData)
+
+  if (response.data) {
+    localStorage.setItem('user', JSON.stringify(response.data))
+  }
+  else{
+    console.log('something went wrong')
+  }
+
+  return response.data
+}
+
 const updateUser = async (userData) => {
   
   
@@ -50,6 +64,7 @@ const authService = {
   updateUser,
   logout,
   login,
+  loginAdmin,
   getUsers,
 }
 

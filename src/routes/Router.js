@@ -17,6 +17,7 @@ const Tables = lazy(() => import("../views/ui/Tables"));
 const Jobs = lazy(() => import("../views/ui/Jobs"));
 const Forms = lazy(() => import("../views/ui/Forms"));
 const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
+const Login = lazy(() => import("../views/Login"));
 
 /*****Routes******/
 
@@ -25,11 +26,12 @@ const ThemeRoutes = [
     path: "/",
     element: <FullLayout />,
     children: [
-      { path: "/", element: <Navigate to="/starter" /> },
-      { path: "/starter", exact: true, element: <Starter /> },
+      { path: "/", element: <Navigate to="starter" /> },
+      { path: "starter", element: <Starter /> },
       { path: "/alerts", exact: true, element: <Alerts /> },
       { path: "/table", exact: true, element: <Tables /> },
       { path: "/jobs", exact: true, element: <Jobs /> },
+      { path: "/login", exact: true, element: <Login /> },
     
     ],
   },
