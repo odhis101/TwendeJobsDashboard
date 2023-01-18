@@ -17,7 +17,7 @@ const navigation = [
 
 
   {
-    title: "Subscribers ",
+    title: "Subscribers ",  
     href: "/table",
     icon: "bi bi-layout-split",
   },
@@ -34,8 +34,8 @@ const Sidebar = () => {
   const { user} = useSelector((state) => state.auth);
   console.log(user)
   if(user=== null){
-    alert('Please login to continue')
-    window.location.href = '/login'
+    //alert('Please login to continue')
+   // window.location.href = '/login'
 }
 
 
