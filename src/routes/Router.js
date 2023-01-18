@@ -23,7 +23,7 @@ const Login = lazy(() => import("../views/Login"));
 
 const ThemeRoutes = [
   {
-    path: "/",
+  
     element: <FullLayout />,
     children: [
       { path: "/", element: <Navigate to="starter" /> },

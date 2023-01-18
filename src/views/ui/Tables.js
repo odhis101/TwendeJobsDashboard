@@ -12,6 +12,14 @@ const Tables = () => {
     const { goals, isLoading, isError, message } = useSelector(
       (state) => state.subscriber
     )
+    const { user } = useSelector((state) => state.auth)
+    if(!user){
+      console.log('user is not logged in')
+      navigate('/login')
+      }
+      else{
+        console.log('user is logged in')
+      }
 
     useEffect(() => {
 

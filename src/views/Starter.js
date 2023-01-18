@@ -12,7 +12,15 @@ import { useNavigate } from 'react-router-dom'
 const Starter = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  
     const { user } = useSelector((state) => state.auth)
+    if(!user){
+    console.log('user is not logged in')
+    navigate('/login')
+    }
+    else{
+      console.log('user is logged in')
+    }
     const { goals, isLoading, isError, message } = useSelector(
         (state) => state.jobs
       )

@@ -59,6 +59,13 @@ const Jobs = () => {
     const { goals, isLoading, isError, message } = useSelector(
       (state) => state.jobs
     )
+    if(!user){
+      console.log('user is not logged in')
+      navigate('/login')
+      }
+      else{
+        console.log('user is logged in')
+      }
     useEffect(() => {
 
       if (isError) {
