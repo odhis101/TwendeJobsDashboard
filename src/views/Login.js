@@ -3,34 +3,85 @@ import SalesChart from "../components/dashboard/SalesChart";
 import Feeds from "../components/dashboard/Feeds";
 import ProjectTables from "../components/dashboard/ProjectTable";
 import { useSelector, useDispatch  } from 'react-redux';
-import { getGoals, reset } from '../features/jobs/jobSclice'
 import { useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import { loginAdmin, reset } from '../features/auth/authSlice'
+
+//import { toast } from 'react-toastify'
+//import { ToastContainer } from 'react-toastify';
+//import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-    const { user } = useSelector((state) => state.auth)
-    const { goals, isLoading, isError, message } = useSelector(
-        (state) => state.jobs
-      )
-      useEffect(() => {
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+  const [formData, setFormData] = useState({
+    phoneNumber: '',
+    password: '',
+  })
+  const { phoneNumber, password } = formData
+  
+  useEffect(() => {
+    if (isError) {
+      //toast.error('check password or phone number')
+    console.log('check password or phone number')
+    }
 
-        if (isError) {
-          console.log('there was an error while loading', message)
-        }
-    
-    
-        dispatch(getGoals())
-    
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const onChange = (e) => {
+    console.log(e.target.value)
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      phoneNumber,
+      password,
+    }
+    if(!phoneNumber || !password){
+      //toast.erro('Please fill in all fields')
+      console.log('Please fill in all fields')
+    }
+    // this code doesn't work as intended work on it
+ 
+    else{
+      try{
+        //console.log(userData)
+        dispatch(loginAdmin(userData))
+        //console.log('login success')
+        
        
-      }, [user, navigate, isError, message, dispatch])
+      }
+      catch(err){
+        console.log(err)
+        // toast message here 
+       // notify()
+
+      }
+
+    
+   
+    }}
+
   
 
   return (
     <div>
+        <form  onSubmit={onSubmit}>
          <MDBContainer fluid className="p-3 my-5 h-custom">
 
 <MDBRow>
@@ -41,6 +92,7 @@ const Login = () => {
 
   <MDBCol col='4' md='6'>
 
+
     <div className="d-flex flex-row align-items-center justify-content-center">
 
       <p className="lead fw-normal mb-0 me-3">Login To admin </p>
@@ -50,18 +102,13 @@ const Login = () => {
 
     
 
-    <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-    <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+    <MDBInput wrapperClass='mb-4' label='Phone Number' id='formControlLg' type="text" placeholder="254703757369" size="lg"onChange={onChange} value={phoneNumber} name ='phoneNumber' />
+    <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" onChange={onChange} value={password} name='password' />
 
-    <div className="d-flex justify-content-between mb-4">
-      <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-      <a href="!#">Forgot password?</a>
-    </div>
 
     <div className='text-center text-md-start mt-4 pt-2'>
-      <MDBBtn className="mb-0 px-5" size='lg'>Login</MDBBtn>
-      <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <Link to="/alerts"  href="#!" className="link-danger">Register</Link></p>
-    </div>
+      <MDBBtn  size='lg'>Login</MDBBtn>
+         </div>
 
   </MDBCol>
 
@@ -69,7 +116,9 @@ const Login = () => {
 
 
 </MDBContainer>
-   
+</form>
+
+
 
     </div>
   );

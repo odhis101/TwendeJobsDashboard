@@ -14,18 +14,26 @@ import {
   Button,
 } from "reactstrap";
 import Logo from "./Logo";
+
 import { ReactComponent as LogoWhite } from "../assets/images/logos/adminprowhite.svg";
 import user1 from "../assets/images/users/user4.jpg";
+import { useSelector,useDispatch } from "react-redux";
+import { logout,reset } from "../features/auth/authSlice";
 
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-
+  const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
+  const onLogout =() => {
+    dispatch(logout());
+    dispatch(reset());
+
+  }
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
@@ -84,7 +92,8 @@ const Header = () => {
             <DropdownItem header>Info</DropdownItem>
             <DropdownItem>My Account</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>Logout</DropdownItem>
+            <DropdownItem onClick={onLogout}>Logout
+            </DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>

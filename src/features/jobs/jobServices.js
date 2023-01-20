@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-const API_URL = 'http://localhost:5000/jobs/setJob'
+const API_URL = 'http://localhost:5000/jobs'
 
 const createGoal = async (goalData, token) => {
     const config = {
@@ -30,7 +30,7 @@ const createGoal = async (goalData, token) => {
       },
     }
   
-    const response = await axios.delete(API_URL + goalId, config)
+    const response = await axios.delete(`${API_URL}/deleteJobs/${goalId}`)
   
     return response.data
   }

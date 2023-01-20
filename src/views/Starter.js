@@ -14,6 +14,7 @@ const Starter = () => {
   const navigate = useNavigate()
   
     const { user } = useSelector((state) => state.auth)
+    console.log(user)
     if(!user){
     console.log('user is not logged in')
     navigate('/login')

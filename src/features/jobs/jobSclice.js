@@ -52,7 +52,7 @@ export const getGoals = createAsyncThunk(
     async (id, thunkAPI) => {
       try {
         const token = thunkAPI.getState().auth.user.token
-        return await jobService.deleteGoal(id, token)
+        return await jobService.deleteSubscriber(id, token)
       } catch (error) {
         const message =
           (error.response &&

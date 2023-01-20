@@ -13,10 +13,17 @@ const getAllSubscribers = async () => {
 
   return response.data
 }
+const deleteSubscriber = async (goalId) => {
+  const response = await axios.delete(`http://localhost:5000/daraja/Deletesubscribers/${goalId}`)
+  console.log(goalId)
+  console.log(response.data)
+  return response.data
+}
 
 const goalService = {
   getAllSubscribers,
-  getSubscribers
+  getSubscribers,
+  deleteSubscriber
 }
 
 export default goalService

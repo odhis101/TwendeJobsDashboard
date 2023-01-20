@@ -3,57 +3,25 @@ import { Row, Col, Table, Card, CardTitle, CardBody } from "reactstrap";
 
 import { useSelector, useDispatch  } from 'react-redux';
 import { getUsers} from '../../features/auth/authSlice'
-
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getGoals, reset } from '../../features/jobs/jobSclice'
+import { deleteGoal } from '../../features/jobs/jobSclice'
 
-const tableData = [
-  {
 
-    Category: "Drivers",
-    Description: "A good driver with 5 - 10 years of experience as a proffesional driver ",
-    user: "Odhis101",
-    Posted_By: "0703765432",
-    
-  
-  },
-  {
-
-    Category: "Drivers",
-    Description: "A good driver with 5 - 10 years of experience as a proffesional driver ",
-    user: "Odhis101",
-    Posted_By: "0703765432",
-    
-  
-  },  {
-
-    Category: "Drivers",
-    Description: "A good driver with 5 - 10 years of experience as a proffesional driver ",
-    user: "Odhis101",
-    Posted_By: "0703765432",
-    
-  
-  },  {
-
-    Category: "Drivers",
-    Description: "A good driver with 5 - 10 years of experience as a proffesional driver ",
-    user: "Odhis101",
-    Posted_By: "0703765432",
-    
-  
-  },  {
-
-    Category: "Drivers",
-    Description: "A good driver with 5 - 10 years of experience as a proffesional driver ",
-    user: "Odhis101",
-    Posted_By: "0703765432",
-    
-  
-  },
-];
 const Jobs = () => {
   const dispatch = useDispatch()
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const deleteUser = (id) => {
+    dispatch(deleteGoal(id))
+    window.location.reload();
+
+  }
     const navigate = useNavigate()
     const { user } = useSelector((state) => state.auth)
     const { goals, isLoading, isError, message } = useSelector(
@@ -114,9 +82,24 @@ const Jobs = () => {
                   <td>{goal.Employers_contact}</td>
                  
                   <td> <button type="button" class="btn btn-success disabled">update</button></td>
-                  <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
-Delete
-</button></td>
+                  <td> <button class="btn btn-danger" onClick={()=>deleteUser(goal._id)}>
+        Delete 
+      </button>
+      </td>
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are You Sure you want to delete ? {goal.Category}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You are unable to retrieve deleted items </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="danger" onClick={handleClose}>
+                Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
                
                 </tr>
               ))}

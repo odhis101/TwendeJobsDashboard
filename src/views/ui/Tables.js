@@ -1,6 +1,6 @@
 import ProjectTables from "../../components/dashboard/ProjectTable";
 import { Row, Col, Table, Card, CardTitle, CardBody } from "reactstrap";
-import { getAllSubscribers } from '../../features/subscriptions/subscriptionSlice';
+import { deleteSubscriber, getAllSubscribers } from '../../features/subscriptions/subscriptionSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +8,13 @@ import { useNavigate } from 'react-router-dom'
 const Tables = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const currentDate = new Date().toISOString().slice(0, 10)
+  const DeleteSubscriber = (id) => {
+    console.log(id)
+    dispatch(deleteSubscriber(id))
+   window.location.reload();
 
+  }
     const { goals, isLoading, isError, message } = useSelector(
       (state) => state.subscriber
     )
@@ -50,9 +56,10 @@ const Tables = () => {
                   <th>Phone number</th>
                   <th>Subscription status</th>
                   <th>Amount</th>
-                  <th>Update</th>
+                  <th>Expiry Date </th>
+                  
                   <th>Remove</th>
-                  <th>Mpesa Confirmation</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -70,18 +77,19 @@ const Tables = () => {
                
                   <td>{goal.phoneNumber}</td>
                   <td>
-                    {goal.Subscription=== false ? (
+                    {goal.expiry <  currentDate ? (
                       <span className="p-2 bg-danger rounded-circle d-inline-block ms-3"></span>
                     )  : (
                       <span className="p-2 bg-success rounded-circle d-inline-block ms-3"></span>
                     )}
                   </td>
+                  
                   <td>{goal.amount}</td>
-                  <td> <button type="button" class="btn btn-success disabled">update</button></td>
-                  <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
+                  <td>{goal.expiry}</td>
+                  <td> <button type="button" class="btn btn-danger"onClick={()=>DeleteSubscriber(goal._id)}  >
 Delete
 </button></td>
-                  <td>XXXYYYZZZ5 Confirmed.</td>
+                  
                 </tr>
               ))}
             </tbody>
@@ -106,7 +114,6 @@ Delete
                   <th>Subscription status</th>
                   <th>Update</th>
                   <th>Remove</th>
-                  <th>Mpesa Confirmation</th>
                 </tr>
               </thead>
               <tbody>
@@ -134,7 +141,6 @@ Delete
                   <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
 Delete
 </button></td>
-                  <td>XXXYYYZZZ5 Confirmed.</td>
                 </tr>
               ))}
             </tbody>
