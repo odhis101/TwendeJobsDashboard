@@ -79,13 +79,18 @@ const SalesChart = () => {
       },
     ],
   };
+
+  // get todays date 
   let date = "2022-12-22"
-  let thisMonth = date.split("-")[1]
+
 
   let total = 0 
   let thisMonthTotal = 0
   let thisWeekTotal = 0
   let todayDate = new Date().toISOString().slice(0, 10)
+  console.log('todayDate', todayDate)
+  let thisMonth = todayDate.split("-")[1]
+  console.log('thisMonth', thisMonth)
   let today = todayDate.split("-")[2]
   let thisYear = todayDate.split("-")[0]
   let thisYearTotal = 0

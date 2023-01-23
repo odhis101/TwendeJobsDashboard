@@ -23,6 +23,11 @@ const Jobs = () => {
 
   }
     const navigate = useNavigate()
+    const Navigate = (id) => {
+      console.log('clicked')
+      console.log(id)
+      navigate(`/updateJob/${id}`)
+    }
     const { user } = useSelector((state) => state.auth)
     const { goals, isLoading, isError, message } = useSelector(
       (state) => state.jobs
@@ -81,7 +86,7 @@ const Jobs = () => {
                   <td>{goal.user}</td>
                   <td>{goal.Employers_contact}</td>
                  
-                  <td> <button type="button" class="btn btn-success disabled">update</button></td>
+                  <td> <button type="button" class="btn btn-success " onClick={()=>Navigate(goal._id)}>update</button></td>
                   <td> <button class="btn btn-danger" onClick={()=>deleteUser(goal._id)}>
         Delete 
       </button>

@@ -8,6 +8,28 @@ const initialState = {
     isLoading: false,
     message: '',
   }
+  // update current job 
+  export const updateGoal = createAsyncThunk(
+    'jobs/update',
+    async (jobData, thunkAPI) => {
+      try {
+          const token = thunkAPI.getState().auth.user.token
+          return await jobService.updateGoal(jobData, token)
+  }
+  catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+  )
+
+  
+
   // Create new Job
   export const createGoal = createAsyncThunk(
     'jobs/create',
@@ -54,6 +76,24 @@ export const getGoals = createAsyncThunk(
         const token = thunkAPI.getState().auth.user.token
         return await jobService.deleteSubscriber(id, token)
       } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString()
+        return thunkAPI.rejectWithValue(message)
+      }
+    }
+  )
+  export const getOneGoal = createAsyncThunk(
+    'jobs/getOne',
+    async (goalId, thunkAPI) => {
+      try {
+        console.log('awesome goal')
+        return await jobService.getOneGoal(goalId)
+      } catch (error) {
+        console.log('lol you are crazy ')
         const message =
           (error.response &&
             error.response.data &&
@@ -112,6 +152,34 @@ export const getGoals = createAsyncThunk(
             state.isError = true
             state.message = action.payload
           })
+          .addCase(getOneGoal.pending, (state) => {
+            state.isLoading = true
+          })
+          .addCase(getOneGoal.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.jobs = action.payload
+          })
+          .addCase(getOneGoal.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+          })
+
+          .addCase(updateGoal.pending, (state) => {
+            state.isLoading = true
+          })
+          .addCase(updateGoal.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.jobs = action.payload
+          })
+          .addCase(updateGoal.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+          })
+
       },
     })
 export const { reset } = goalSlice.actions
