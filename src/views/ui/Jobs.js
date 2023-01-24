@@ -27,6 +27,7 @@ const Jobs = () => {
 
 
   const deleteUser = (id) => {
+    console.log('delete user')
     dispatch(deleteGoal(id))
     window.location.reload();
 

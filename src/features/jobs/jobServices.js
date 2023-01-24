@@ -41,8 +41,8 @@ const createGoal = async (goalData, token) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  
-    const response = await axios.delete(`${API_URL}/deleteJobs/${goalId}`)
+  console.log('deleting the goal',goalId)
+    const response = await axios.delete(`${API_URL}/jobs/deleteJobs/${goalId}`)
   
     return response.data
   }
