@@ -40,7 +40,7 @@ const Forms = () => {
   },[user,dispatch])
   console.log('here are the',jobs)
   const [postData, setPostData] = useState({ Employers_Name :jobs.Employers_Name, jobDescription: jobs.jobDescription, EMPLOYER_EMAIL:jobs.EMPLOYER_EMAIL,Employers_contact: jobs.Employers_contact, jobTitle:jobs.jobTitle, DeadlineDate: jobs.DeadlineDate,Category:jobs.Category});
-console.log(postData)
+console.log('post data',postData)
 
 const handleSubmit=(e) => {
   e.preventDefault();
