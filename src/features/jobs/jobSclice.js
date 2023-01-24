@@ -64,6 +64,24 @@ export const getGoals = createAsyncThunk(
       }
     }
   )
+  export const excelUpload = createAsyncThunk(
+    'jobs/excel',
+    async (data, thunkAPI) => {
+      try {
+        const token = thunkAPI.getState().auth.user.token
+        return await jobService.excelUpload(data, token)
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString()
+        return thunkAPI.rejectWithValue(message)
+      }
+    }
+  )
+
   export const goalSlice = createSlice({
     name: 'job',
     initialState,
@@ -108,6 +126,22 @@ export const getGoals = createAsyncThunk(
             )
           })
           .addCase(deleteGoal.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+          })
+          
+          .addCase(excelUpload.pending, (state) => {
+            state.isLoading = true
+          })
+          .addCase(excelUpload.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.goals = state.goals.filter(
+              (goal) => goal._id !== action.payload.id
+            )
+          })
+          .addCase(excelUpload.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload

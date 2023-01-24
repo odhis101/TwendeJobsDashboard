@@ -9,14 +9,23 @@ import { useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getGoals, reset } from '../../features/jobs/jobSclice'
 import { deleteGoal } from '../../features/jobs/jobSclice'
-
+import axios from 'axios';
 
 const Jobs = () => {
+  
+  var xlsx = require("xlsx")
   const dispatch = useDispatch()
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files);
+  };
+
+
   const deleteUser = (id) => {
     dispatch(deleteGoal(id))
     window.location.reload();
@@ -47,6 +56,60 @@ const Jobs = () => {
     }, [user, navigate, isError, message, dispatch])
   
     console.log(goals)
+    const readUploadFile = (e) => {
+      console.log(e.target.files)
+      console.log('here is selected file ',selectedFile)
+      e.preventDefault();
+      if (e.target.files) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+              const data = e.target.result;
+              const workbook = xlsx.read(data, { type: "array" });
+              const sheetName = workbook.SheetNames[0];
+              const worksheet = workbook.Sheets[sheetName];
+              const json = xlsx.utils.sheet_to_json(worksheet);
+              console.log(json);
+          };
+          reader.readAsArrayBuffer(e.target.files[0]);
+      }
+  }
+  const handleSubmit=(e) => {
+    e.preventDefault();
+    console.log(selectedFile)
+    if (selectedFile === null) {
+      alert('Please select a file to upload')
+      return
+    }
+    else{
+      // convert excel to json
+      console.log("we are here ")
+      const reader = new FileReader();
+      reader.onload = (e) => {
+          const data = e.target.result;
+          const workbook = xlsx.read(data, { type: "array" });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const json = xlsx.utils.sheet_to_json(worksheet);
+          console.log(json);
+          axios.post('http://localhost:5000/jobs/excelToMongoDb', json, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then(res => {
+            console.log(res)
+            window.location.reload();
+          }).catch(err => {
+            console.log(err)
+          })
+         
+      };
+  
+      reader.readAsArrayBuffer(selectedFile[0]);
+
+     
+    }
+  }
+   
     return (
     <Row>
         <Col lg="12">
@@ -86,20 +149,7 @@ const Jobs = () => {
         Delete 
       </button>
       </td>
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are You Sure you want to delete ? {goal.Category}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>You are unable to retrieve deleted items </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={handleClose}>
-                Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+ 
                
                 </tr>
               ))}
@@ -107,6 +157,11 @@ const Jobs = () => {
             
             </Table>
           </CardBody>
+          <form onSubmit={handleSubmit}>
+            <input name = "excel" type= "file" onChange={handleFileSelect} />
+           <br/>
+           <button type="submit" className="btn btn-success">Upload</button>
+            </form>
         </Card>
       </Col>
     </Row>
