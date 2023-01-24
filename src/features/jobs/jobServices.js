@@ -46,6 +46,11 @@ const createGoal = async (goalData, token) => {
   
     return response.data
   }
+  const excelUpload = async (req, res) => {
+    const response = await axios.get(`${API_URL}/jobs/excel`)
+    console.log(response)
+    return response
+  }
   
   
   const goalService = {
@@ -53,7 +58,8 @@ const createGoal = async (goalData, token) => {
     getGoals,
     deleteGoal,
     getOneGoal,
-    updateGoal
+    updateGoal,
+    excelUpload,
   }
   
   export default goalService
