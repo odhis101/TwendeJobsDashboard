@@ -13,11 +13,7 @@ const navigation = [
     href: "/table",
     icon: "bi bi-layout-split",
   },
-  {
-    title: "Alert",
-    href: "/alerts",
-    icon: "bi bi-bell",
-  },
+
 
 
   
