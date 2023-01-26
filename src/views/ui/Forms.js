@@ -18,8 +18,10 @@ import { useState } from "react";
 import { useEffect } from 'react';
 import { updateGoal } from "../../features/jobs/jobSclice";
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 const Forms = () => {
+  const API_URL = process.env.REACT_APP_API_URL
   const id = useParams().id;
   console.log('this is the id',id)
   const { jobs, iSLoading, IsError, Message } = useSelector(
@@ -48,7 +50,10 @@ const handleSubmit=(e) => {
   console.log('1234')
   console.log(postData)
   // update the goal 
-dispatch(updateGoal(id,postData))
+  axios.post(`${API_URL}/jobs/updateJobs/${id}`,postData)
+  // go back to the previous page 
+  navigate(-1)
+//dispatch(updateGoal(id,postData))
 //alert('Job Posted Successfully')
 //navigate('/')
 }

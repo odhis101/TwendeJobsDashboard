@@ -12,7 +12,7 @@ import { deleteGoal } from '../../features/jobs/jobSclice'
 import axios from 'axios';
 
 const Jobs = () => {
-  
+  const API_URL = process.env.REACT_APP_API_URL
   var xlsx = require("xlsx")
   const dispatch = useDispatch()
   const [show, setShow] = useState(false);
@@ -97,7 +97,7 @@ const Jobs = () => {
           const worksheet = workbook.Sheets[sheetName];
           const json = xlsx.utils.sheet_to_json(worksheet);
           console.log(json);
-          axios.post('http://localhost:5000/jobs/excelToMongoDb', json, {
+          axios.post(`${API_URL}/jobs/excelToMongoDb`, json, {
             headers: {
               'Content-Type': 'application/json'
             }

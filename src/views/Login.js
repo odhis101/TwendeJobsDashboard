@@ -19,6 +19,7 @@ const Login = () => {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   )
+  console.log(user)
   const [formData, setFormData] = useState({
     phoneNumber: '',
     password: '',

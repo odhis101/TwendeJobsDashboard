@@ -13,8 +13,8 @@ const initialState = {
     'jobs/update',
     async (jobData, thunkAPI) => {
       try {
-          const token = thunkAPI.getState().auth.user.token
-          return await jobService.updateGoal(jobData, token)
+          console.log('update goal',jobData)
+          return await jobService.updateGoal(jobData)
   }
   catch (error) {
       const message =
@@ -183,6 +183,7 @@ export const getGoals = createAsyncThunk(
             state.isError = true
             state.message = action.payload
           })
+
 
           .addCase(updateGoal.pending, (state) => {
             state.isLoading = true
