@@ -1,7 +1,7 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom'
 const navigation = [
   {
     title: "Dashboard",
@@ -14,10 +14,19 @@ const navigation = [
     icon: "bi bi-layout-split",
   },
   {
+    title: "Alert",
+    href: "/alerts",
+    icon: "bi bi-bell",
+  },
+
+
+  
+  {
     title: "Job List ",
     href: "/Jobs",
     icon: "bi bi-layout-split",
   },
+  
 
 
  
@@ -25,10 +34,13 @@ const navigation = [
 
 const Sidebar = () => {
   const { user} = useSelector((state) => state.auth);
+  const navigate = useNavigate()
   console.log(user)
   if(user=== null){
     //alert('Please login to continue')
    // window.location.href = '/login'
+ //navigate('/login')
+
 }
 
 

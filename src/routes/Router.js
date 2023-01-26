@@ -31,7 +31,7 @@ const ThemeRoutes = [
       { path: "/alerts", exact: true, element: <Alerts /> },
       { path: "/table", exact: true, element: <Tables /> },
       { path: "/jobs", exact: true, element: <Jobs /> },
-      
+      { path: "/login", element: <Login /> },
       { path: "/updateJob/:id", exact: true, element: <Forms /> },
     
     ],

@@ -32,8 +32,8 @@ const Login = () => {
     console.log('check password or phone number')
     }
 
-    if (isSuccess || user) {
-      navigate('/')
+    if (user != null) {
+     navigate('/')
     }
 
     dispatch(reset())

@@ -35,7 +35,7 @@ const Starter = () => {
         dispatch(getGoals())
     
        
-      }, [user, navigate, isError, message, dispatch])
+      }, [user, isError, message, dispatch])
   
 
   return (
