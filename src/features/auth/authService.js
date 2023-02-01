@@ -43,14 +43,14 @@ const loginAdmin = async (userData) => {
 const updateUser = async (userData) => {
   
   
-  const response = await axios.get("http://localhost:5000/users/updateUser",userData)
+  const response = await axios.get(`${API_URL}users/updateUser`,userData)
 
   return response.data
 }
 const getUsers = async () => {
   
   
-  const response = await axios.get("http://localhost:5000/users/getUsers")
+  const response = await axios.get(`${API_URL}/users/getUsers`)
 
   return response.data
 }
