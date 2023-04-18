@@ -27,7 +27,7 @@ const Starter = () => {
       useEffect(() => {
 
         if (isError) {
-          console.log('there was an error while loading', message)
+          console.log('there was an error whilst loading', message)
         }
     
     
