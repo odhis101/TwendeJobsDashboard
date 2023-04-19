@@ -19,7 +19,7 @@ const Sms = () => {
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0">
             <i className="bi bi-card-text me-2"> </i>
-            List of All Subscribers
+            List of All sms messages 
           </CardTitle>
           <CardBody className="">
             <Table bordered hover>
