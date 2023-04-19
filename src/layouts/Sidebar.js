@@ -22,7 +22,11 @@ const navigation = [
     href: "/Jobs",
     icon: "bi bi-layout-split",
   },
-  
+  {
+    title: "SMS  ",
+    href: "/Sms",
+    icon: "bi bi-layout-split",
+  },
 
 
  
