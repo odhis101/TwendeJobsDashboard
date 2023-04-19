@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom'
 import { getGoals, reset } from '../../features/jobs/jobSclice'
 import { deleteGoal } from '../../features/jobs/jobSclice'
 import axios from 'axios';
-
 const Jobs = () => {
   const API_URL = process.env.REACT_APP_API_URL
   var xlsx = require("xlsx")
