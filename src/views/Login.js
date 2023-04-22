@@ -1,3 +1,5 @@
+ 
+
 import { Col, Row } from "reactstrap";
 import SalesChart from "../components/dashboard/SalesChart";
 import Feeds from "../components/dashboard/Feeds";
@@ -8,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import { loginAdmin, reset } from '../features/auth/authSlice'
-
+import './login.css'
 
 //import { toast } from 'react-toastify'
 //import { ToastContainer } from 'react-toastify';
@@ -105,13 +107,15 @@ const Login = () => {
 
     
 
-    <MDBInput wrapperClass='mb-4' label='Phone Number' id='formControlLg' type="text" placeholder="254703757369" size="lg"onChange={onChange} value={phoneNumber} name ='phoneNumber' />
-    <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" onChange={onChange} value={password} name='password' />
+    <MDBInput wrapperClass='mb-4' label='Phone Number' id='formControlLg' type="text" placeholder="Enter Phone Number" size="lg"onChange={onChange} value={phoneNumber} name ='phoneNumber' />
+    <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" onChange={onChange} value={password} name='password' placeholder="Enter Password" />
 
 
     <div className='text-center text-md-start mt-4 pt-2'>
-      <MDBBtn  size='lg'>Login</MDBBtn>
-         </div>
+    <button class="btn btn-lg btn-orange">Login</button>
+    
+    </div>
+    <Link to="/forgotPassword" className="text-decoration-none text-reset py-4" > forgot password</Link>
 
   </MDBCol>
 
