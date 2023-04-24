@@ -1,4 +1,8 @@
 .btn-orange {
-    background-color: #FFB246;
-    border-color: #FFB246;
-  }
+  background-color: #FFB246;
+  border-color: #FFB246;
+}
+
+.btn-orange:hover {
+  background-image: linear-gradient(to bottom, #FFD382, #FFFDE5);
+}

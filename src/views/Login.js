@@ -27,11 +27,13 @@ const Login = () => {
     password: '',
   })
   const { phoneNumber, password } = formData
-  
+  const [showError, setShowError] = useState(false);
+
   useEffect(() => {
     if (isError) {
       //toast.error('check password or phone number')
     console.log('check password or phone number')
+    setShowError(true);
     }
 
     if (user != null) {
@@ -48,42 +50,34 @@ const Login = () => {
       [e.target.name]: e.target.value,
     }))
   }
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
 
-    const userData = {
-      phoneNumber,
-      password,
-    }
     if(!phoneNumber || !password){
-      //toast.erro('Please fill in all fields')
-      console.log('Please fill in all fields')
+      setShowError(true);
+      return;
     }
-    // this code doesn't work as intended work on it
- 
-    else{
-      try{
-        //console.log(userData)
-        dispatch(loginAdmin(userData))
-        //console.log('login success')
-        
-       
-      }
-      catch(err){
-        console.log(err)
-        // toast message here 
-       // notify()
-
-      }
+    
+    try {
+      await dispatch(loginAdmin(formData));
+    } catch (err) {
+      setShowError(true);
+    }
+  }
 
     
    
-    }}
+    console.log(showError )
 
   
 
   return (
     <div>
+      {showError && (
+        <div className="alert alert-danger" role="alert">
+          Phone number or password is incorrect.
+        </div>
+      )}
         <form  onSubmit={onSubmit}>
          <MDBContainer fluid className="p-3 my-5 h-custom">
 
@@ -97,7 +91,9 @@ const Login = () => {
 
 
     <div className="d-flex flex-row align-items-center justify-content-center">
-
+    {isError && (
+  <div className="text-danger mt-3">{'check password or phone number'}</div>
+)}
       <p className="lead fw-normal mb-0 me-3">Login To admin </p>
 
       
@@ -113,7 +109,7 @@ const Login = () => {
     <button class="btn btn-lg btn-orange">Login</button>
     
     </div>
-    <Link to="/forgotPassword" className="text-decoration-none text-reset py-4" > forgot password</Link>
+    <Link to="/forgotPassword" className="text-decoration-none text-reset"  style={{marginTop: '20px'}}> forgot password</Link>
 
   </MDBCol>
 
