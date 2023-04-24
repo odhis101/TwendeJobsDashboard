@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 function ForgotPassword() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -7,12 +8,14 @@ function ForgotPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [phoneNumberSubmitted, setPhoneNumberSubmitted] = useState(false);
   const [otpCodeSubmitted, setOtpCodeSubmitted] = useState(false);
+  const navigate = useNavigate()
+  const API_URL = process.env.REACT_APP_API_URL
 
   const handlePhoneNumberSubmit = (event) => {
     event.preventDefault();
     // Send OTP code to the provided phone number
     // Display the OTP code form
-    fetch(`http://localhost:5000/messages/sendOtp`, {
+    fetch(`${API_URL}/messages/sendOtpAdmin`, {
       method: 'POST',
       body: JSON.stringify({
         phoneNumber: phoneNumber
@@ -39,7 +42,7 @@ function ForgotPassword() {
 
   const handleOtpCodeSubmit = (event) => {
     event.preventDefault();
-    fetch(`http://localhost:5000/users/verifyOtpForNewAdmin`, {
+    fetch(`${API_URL}/users/verifyOtpForNewAdmin`, {
       method: 'POST',
       body: JSON.stringify({
       phoneNumber: phoneNumber, // Assuming you have stored the user's phone number somewhere
@@ -69,7 +72,7 @@ function ForgotPassword() {
   const handleNewPasswordSubmit = async (event) => {
     event.preventDefault();
     try {
-        const response = await fetch(`http://localhost:5000/users/updatePasswordAdmin`, {
+        const response = await fetch(`${API_URL}/users/updatePasswordAdmin`, {
           method: "post",
           headers: {
             "Content-Type": "application/json",
@@ -82,7 +85,7 @@ function ForgotPassword() {
           if (data.message === 'Password updated successfully') {
            
            // dispatch(login(userData))
-            //navigate('/login')
+            navigate('/login')
             console.log('success')
   
   
