@@ -55,12 +55,14 @@ const Login = () => {
 
     if(!phoneNumber || !password){
       setShowError(true);
+      console.log('check password or phone number is written')
       return;
     }
     
     try {
       await dispatch(loginAdmin(formData));
     } catch (err) {
+      console.log(err)
       setShowError(true);
     }
   }

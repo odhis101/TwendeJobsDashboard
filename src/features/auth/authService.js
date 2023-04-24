@@ -28,7 +28,7 @@ const login = async (userData) => {
 }
 
 const loginAdmin = async (userData) => {
-  const response = await axios.post(`http://localhost:5000/users/loginAdmin`, userData)
+  const response = await axios.post(`${API_URL}/users/loginAdmin`, userData)
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
