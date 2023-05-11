@@ -13,8 +13,8 @@ const Jobs = lazy(() => import("../views/ui/Jobs"));
 const Forms = lazy(() => import("../views/ui/Forms"));
 const Login = lazy(() => import("../views/Login"));
 const Sms = lazy(() => import("../views/ui/SMS"));
+const updateNumber = lazy(() => import("../views/ui/Breadcrumbs"));
 const ForgotPassword =  lazy(() => import("../views/ForgotPass"));
-
 /*****Routes******/
 
 const ThemeRoutes = [
@@ -36,6 +36,7 @@ const ThemeRoutes = [
       { path: "/jobs", exact: true, element: <Jobs /> },
       { path: "/updateJob/:id", exact: true, element: <Forms /> },
       { path: "/Sms", exact: true, element: <Sms /> },
+      { path: "/updateNumber/:id", exact: true, element: <Alerts /> },
     ],
   },
 ];

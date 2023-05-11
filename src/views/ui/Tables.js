@@ -1,8 +1,8 @@
 import ProjectTables from "../../components/dashboard/ProjectTable";
-import { Row, Col, Table, Card, CardTitle, CardBody } from "reactstrap";
+import { Row, Col, Table, Card, CardTitle, CardBody, Toast, ToastHeader, ToastBody } from "reactstrap";
 import { deleteSubscriber, getAllSubscribers } from '../../features/subscriptions/subscriptionSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import { getUsers } from '../../features/auth/authSlice';
 
@@ -15,6 +15,15 @@ const Tables = () => {
     dispatch(deleteSubscriber(id))
    window.location.reload();
 
+  }
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+
+
+
+  const Navigate = (id) => {
+    console.log('clicked')
+    console.log(id)
+    navigate(`/updateNumber/${id}`)
   }
     const { goals, isLoading, isError, message } = useSelector(
       (state) => state.subscriber
@@ -52,12 +61,32 @@ const Tables = () => {
      
     }, [ navigate, isError, message, dispatch])  
     console.log('goals', goals)
+    const handleDelete = async (id) => {
+      try {
+        const response = await fetch(`http://localhost:5000/users/deleteNumber/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          setShowSuccessToast(true);
+        } else {
+          const error = await response.json();
+          alert(error.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+
 
 
   return (
     <Row>
     
-  
+
       <Col lg="12">
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0">
@@ -146,8 +175,8 @@ Delete
                   <th scope="row">{index + 1}</th>
                
                   <td>{goal.phoneNumber}</td>
-                  <td> <button type="button" class="btn btn-success disabled">update</button></td>
-                  <td> <button type="button" class="btn btn-danger disabled" data-toggle="modal" data-target="#exampleModal">
+                  <td> <button type="button" class="btn btn-success"onClick={()=>Navigate(goal._id)} >update</button></td>
+                  <td> <button type="button" class="btn btn-danger" onClick={() => handleDelete(goal._id)}>
 Delete
 </button></td>
                 </tr>

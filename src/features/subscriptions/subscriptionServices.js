@@ -13,6 +13,8 @@ const getAllSubscribers = async () => {
   //const response = await axios.get("http://localhost:5000/daraja/Allsubscriptions")
   const response = await axios.get(`${API_URL}/daraja/Allsubscriptions`)
 
+
+
   return response.data
 }
 const deleteSubscriber = async (goalId) => {
