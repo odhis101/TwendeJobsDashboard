@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 import { getUsers } from '../../features/auth/authSlice';
+const API_URL = process.env.REACT_APP_API_URL
 
 const Tables = () => {
   const navigate = useNavigate()
@@ -16,6 +17,7 @@ const Tables = () => {
    window.location.reload();
 
   }
+  console.log(API_URL)
   const [showSuccessToast, setShowSuccessToast] = useState(false);
 
 
@@ -63,7 +65,7 @@ const Tables = () => {
     console.log('goals', goals)
     const handleDelete = async (id) => {
       try {
-        const response = await fetch(`http://localhost:5000/users/deleteNumber/${id}`, {
+        const response = await fetch(`${API_URL}/users/deleteNumber/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

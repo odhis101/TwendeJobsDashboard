@@ -15,6 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useHistory, useParams } from 'react-router-dom'
 
+const API_URL = process.env.REACT_APP_API_URL
 
 
 const Alerts = () => {
@@ -26,7 +27,7 @@ const Alerts = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/users/updateNumber/${id}`, {
+      const response = await fetch(`${API_URL}/users/updateNumber/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
