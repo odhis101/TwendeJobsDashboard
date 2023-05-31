@@ -10,7 +10,7 @@ const Starter = lazy(() => import("../views/Starter.js"));
 const Alerts = lazy(() => import("../views/ui/Alerts"));
 const Tables = lazy(() => import("../views/ui/Tables"));
 const Jobs = lazy(() => import("../views/ui/Jobs"));
-const Forms = lazy(() => import("../views/ui/Forms"));
+const Forms = lazy(() => import("../views/ui/Forms")); // this a form 
 const Login = lazy(() => import("../views/Login"));
 const Sms = lazy(() => import("../views/ui/SMS"));
 const updateNumber = lazy(() => import("../views/ui/Breadcrumbs"));

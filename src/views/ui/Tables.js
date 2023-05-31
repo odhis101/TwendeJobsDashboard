@@ -62,7 +62,11 @@ const Tables = () => {
   
      
     }, [ navigate, isError, message, dispatch])  
-    console.log('goals', goals)
+    console.log('these are the subs goals', goals.subscribers[0].phoneNumber)
+
+
+
+
     const handleDelete = async (id) => {
       try {
         const response = await fetch(`${API_URL}/users/deleteNumber/${id}`, {
@@ -81,6 +85,7 @@ const Tables = () => {
         console.error(error);
       }
     };
+
     
 
 
