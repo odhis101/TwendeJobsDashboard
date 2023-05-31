@@ -51,11 +51,7 @@ const Starter = () => {
         </Col>
       </Row>
       {/***Table ***/}
-      <Row>
-        <Col lg="12">
-          <ProjectTables />
-        </Col>
-      </Row>
+   
       {/***Blog Cards***/}
     </div>
   );
