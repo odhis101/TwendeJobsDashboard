@@ -26,7 +26,7 @@ const Feeds = (goals) => {
       if (response.ok) {
         const data = await response.json();
         // Process the data received from the server
-        //console.log('this is all users ',data);
+        console.log('this is all users ',data);
         return data
       } else {
         // Handle the case where the request was not successful
@@ -78,18 +78,8 @@ const Feeds = (goals) => {
 
       
         const updatedFeedData = [
-          {
-            title: "New user registered.",
-            icon: "bi bi-person",
-            color: "info",
-            date: displayMessage, // Update the date parameter with the dynamically calculated value
-          },
-          {
-            title: "Job Listing Removed ",
-            icon: "bi bi-hdd",
-            color: "danger",
-            date: displayMessage, // Update the date parameter with the dynamically calculated value
-          },
+   
+    
           {
             title: "New Job listing .",
             icon: "bi bi-bag-check",
