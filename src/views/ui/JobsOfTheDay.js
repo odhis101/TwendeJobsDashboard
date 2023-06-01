@@ -29,7 +29,7 @@ const JobsOfTheDay = () => {
 
 
   
-  const [postData, setPostData] = useState({ Employers_contact:"",Employers_Name :"", jobDescription:"", EMPLOYER_EMAIL:"",Employers_contact: "", jobTitle:"", DeadlineDate: "",Category:"",Location:""});
+  const [postData, setPostData] = useState({ Salary:"",Requirment:"",Employers_contact:"",Employers_Name :"", jobDescription:"", EMPLOYER_EMAIL:"",Employers_contact: "", jobTitle:"", DeadlineDate: "",Category:"",Location:""});
 console.log('post data',postData)
 
 const handleSubmit=(e) => {
@@ -38,13 +38,13 @@ const handleSubmit=(e) => {
   console.log('1234')
   console.log(postData)
   // update the goal 
-  //axios.post(`${API_URL}/jobs/setJobsOfTheDay`,postData)
-  axios.post(`http://localhost:5000/jobs/setJobsOfTheDay`,postData)
+  axios.post(`${API_URL}/jobs/setJobsOfTheDay`,postData)
+ // axios.post(`http://localhost:5000/jobs/setJobsOfTheDay`,postData)
   // go back to the previous page 
  // navigate(-1)
 //dispatch(updateGoal(id,postData))
-//alert('Job Posted Successfully')
-//navigate('/')
+alert('Job updated Successfully')
+navigate('/')
 }
   return (
     <Row>
@@ -100,6 +100,43 @@ const handleSubmit=(e) => {
                 
                   value = {postData.Category} 
                   onChange ={(e) => setPostData({...postData,Category: e.target.value})}
+              
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleEmail">Requriment </Label>
+                <Input
+                  id="exampleEmail"
+                  name="email"
+                  placeholder="with a placeholder"
+                
+                  value = {postData.Requirment} 
+                  onChange ={(e) => setPostData({...postData,Requirment: e.target.value})}
+              
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleEmail">Salary </Label>
+                <Input
+                  id="exampleEmail"
+                  name="email"
+                  placeholder="with a placeholder"
+                
+                  value = {postData.Salary} 
+                  onChange ={(e) => setPostData({...postData,Salary: e.target.value})}
+              
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleEmail">Deadline Date </Label>
+                <Input
+                  id="exampleEmail"
+                  name="email"
+                  type="date"
+                  placeholder="with a placeholder"
+                
+                  value = {postData.DeadlineDate} 
+                  onChange ={(e) => setPostData({...postData,DeadlineDate: e.target.value})}
               
                 />
               </FormGroup>
