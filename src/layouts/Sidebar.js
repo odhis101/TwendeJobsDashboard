@@ -27,7 +27,11 @@ const navigation = [
     href: "/Sms",
     icon: "bi bi-layout-split",
   },
-
+  {
+    title: "Jobs Of The Day  ",
+    href: "/jobsOfTheDay",
+    icon: "bi bi-layout-split",
+  },
 
  
 ];
