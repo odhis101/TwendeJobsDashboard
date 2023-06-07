@@ -31,11 +31,17 @@ const Jobs = () => {
     window.location.reload();
 
   }
+  
     const navigate = useNavigate()
     const Navigate = (id) => {
       console.log('clicked')
       console.log(id)
       navigate(`/updateJob/${id}`)
+    }
+    function handleAddJob() {
+      // Your logic to handle the "Add Job" button click event
+      // For example, you can navigate to a new page or perform any other action
+      navigate('/addjob');
     }
     const { user } = useSelector((state) => state.auth)
     const { goals, isLoading, isError, message } = useSelector(
@@ -166,7 +172,10 @@ const Jobs = () => {
             <input name = "excel" type= "file" onChange={handleFileSelect} />
            <br/>
            <button type="submit" className="btn btn-success">Upload</button>
-            </form>
+          </form>
+          <br/>
+          <button type="button" class="btn btn-primary"  onClick={handleAddJob}>Add Job</button>
+
         </Card>
       </Col>
     </Row>
