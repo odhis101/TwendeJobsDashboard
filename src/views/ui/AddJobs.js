@@ -120,7 +120,7 @@ Employers Contact
                     id="exampleEmail"
                     name="email"
                     placeholder="with a placeholder"
-                    type="email"
+                    type="tel"
                     value = {postData.Employers_contact} 
                     onChange ={(e) => setPostData({...postData,Employers_contact: e.target.value})} 
                   
