@@ -50,7 +50,7 @@ const handleSubmit=(e) => {
   console.log('1234')
   console.log(postData)
   // update the goal 
-  axios.post(`http://localhost:5000/jobs/updateJobs/${id}`,postData)
+  axios.post(`${API_URL}/jobs/updateJobs/${id}`,postData)
   // go back to the previous page 
   //navigate(-1)
 //dispatch(updateGoal(id,postData))
