@@ -12,7 +12,7 @@ const getOneGoal = async (goalId) => {
 const updateGoal = async(goalId,goalData) =>{
   console.log('here is the param',goalId)
   console.log('updating the services',goalData)
-  const response = await axios.post(`http://localhost:5000/jobs/updateJobs/${goalId}`,goalData)
+  const response = await axios.post(`${API_URL}/jobs/updateJobs/${goalId}`,goalData)
   console.log(response)
   return response.data
 }

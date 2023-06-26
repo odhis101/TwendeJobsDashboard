@@ -28,7 +28,7 @@ const Jobs = () => {
   const deleteUser = (id) => {
     console.log('delete user')
     dispatch(deleteGoal(id))
-    window.location.reload();
+    //window.location.reload();
 
   }
   
@@ -102,7 +102,7 @@ const Jobs = () => {
           const worksheet = workbook.Sheets[sheetName];
           const json = xlsx.utils.sheet_to_json(worksheet);
           console.log(json);
-          axios.post(`${API_URL}/jobs/excelToMongoDb`, json, {
+          axios.post(`http://localhost:5000/jobs/excelToMongoDb`, json, {
             headers: {
               'Content-Type': 'application/json'
             }

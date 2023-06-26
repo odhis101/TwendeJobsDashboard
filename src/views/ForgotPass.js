@@ -15,7 +15,7 @@ function ForgotPassword() {
     event.preventDefault();
     // Send OTP code to the provided phone number
     // Display the OTP code form
-    fetch(`${API_URL}/messages/sendOtpAdmin`, {
+    fetch(`http://localhost:5000/messages/sendOtpAdmin`, {
       method: 'POST',
       body: JSON.stringify({
         phoneNumber: phoneNumber
